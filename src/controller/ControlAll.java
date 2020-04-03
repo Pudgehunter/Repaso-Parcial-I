@@ -19,6 +19,10 @@ public class ControlAll {
 		logica.sortList(c);
 	}
 	
+	public void guardarMetodos() {
+		logica.guardarMetodos();
+	}
+	
 	public LinkedList<Perros> listPerros() {
 		return logica.getPerros();
 	} 

@@ -7,6 +7,7 @@ import processing.core.PApplet;
 public class Main extends PApplet {
 	
 	ControlAll control;
+
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -24,15 +25,17 @@ public class Main extends PApplet {
 	public void draw() {
 		background(255);
 		
-		fill(0);
+		
 		for (int i = 0; i < control.listPerros().size(); i++) {
-			control.listPerros().get(i).drawLetras(50, this);
+			control.listPerros().get(i).drawLetras(50+(i*20), this);
 		}
 		
 	}
 	
+
 	public void keyPressed() {
 		control.sortPerros(key);
+		control.guardarMetodos();
 	}
 	
 }

@@ -7,18 +7,17 @@ import processing.core.PApplet;
 
 public class Logica {
 	
-	//private PApplet app;
+	private PApplet app;
 	private LinkedList<Perros> perros;
 	private PerrosEdad edadPerros;
 	private PerrosNombre nombrePerros;
 	private PerrosRaza razaPerros;
-	private String[] txtUno, txtDos, txtUnoSplit, txtDoSplit;
-	private String raza, edad, nombre;
-	private int id;
-	
+	String[] txtUno, txtDos, txtUnoSplit, txtDoSplit;
+	private String raza, nombre;
+	private int id, edad;
 	
 	public Logica(PApplet app) {
-		//this.app = app;
+		this.app = app;
 		this.perros = new LinkedList<Perros>();
 		this.edadPerros = new PerrosEdad();
 		this.razaPerros = new PerrosRaza();
@@ -36,37 +35,63 @@ public class Logica {
 				if(txtDoSplit[0].equals(txtUnoSplit[0])) {
 					id = Integer.parseInt(txtUnoSplit[0]);
 					nombre = txtUnoSplit[1];
-					//nombre = raza.toLowerCase();
-					edad = txtUnoSplit[2];
+					edad = Integer.parseInt(txtUnoSplit[2]);
 					raza = txtDoSplit[1];
-					//fecha = txtDos[2];
-					perros.add(new Perros(edad, raza, nombre, id, 50+(50*i), app));
+					perros.add(new Perros(id, raza, nombre, edad, app));
 				}
 			}
-		}
-	}
 
+		}
 		
-	
+	}
 
 	public void sortList(char c) {
 		switch (c) { 
-		case 'p':
+		case 'a':
 				Collections.sort(perros);
+				System.out.println("Si funciono p");
+				//app.saveStrings("ID.txt",guardarTextosID);
 			break;
-		case 'e':
+		case 's':
 				Collections.sort(perros,edadPerros);
+				System.out.println("Si funciono e");
+				//app.saveStrings("Raza.txt",guardarTextosRaza);
 			break;
-		case 'r':
+		case 'd':
 				Collections.sort(perros,razaPerros);
+				System.out.println("Si funciono r");
+				//app.saveStrings("Nombre.txt",guardarTextosNombre);
 			break;
-		case 'n':
+		case 'f':
 			Collections.sort(perros,nombrePerros);
+			System.out.println("Si funciono n");
+			//app.saveStrings("Edad.txt",guardarTextosEdad);
 		break;
 		default:
 			break;
 		}
 	}
+	
+	public void guardarMetodos() {
+		
+		String[] guardarTxt;
+		guardarTxt = new String [perros.size()];
+		
+		for (int i = 0; i < perros.size(); i++) {
+			
+			String guardarPerrosEdad =  "perros.get(i).getEdadPerros()";
+			String guardarPerrosNombre = perros.get(i).getNombrePerros();
+			String guardarPerrosRaza = perros.get(i).getRazaPerros();
+			String guardarPerrosID = "perros.get(i).getIdPerros()";
+			
+			guardarTxt[i] = guardarPerrosID
+					+ guardarPerrosNombre
+					+ guardarPerrosRaza
+					+ guardarPerrosEdad;
+		}
+		app.saveStrings("../data/exports/ID.txt", guardarTxt);
+	}
+	
 
 	public LinkedList<Perros> getPerros() {
 		return perros;
